@@ -1,5 +1,5 @@
-import type { JSX } from "solid-js";
-import { render } from "solid-js/web";
+import type { JSX } from 'solid-js'
+import { render } from 'solid-js/web'
 
 /**
  * Solid adapter for isolet. Disposes and re-renders on each call
@@ -9,19 +9,19 @@ import { render } from "solid-js/web";
 export const solid = <P extends Record<string, unknown>>(
   Component: (props: P) => JSX.Element,
 ): ((container: HTMLElement, props: P) => () => void) => {
-  let dispose: (() => void) | undefined;
+  let dispose: (() => void) | undefined
 
   return (container: HTMLElement, props: P) => {
     if (dispose) {
-      dispose();
-      dispose = undefined;
+      dispose()
+      dispose = undefined
     }
 
-    dispose = render(() => Component(props), container);
+    dispose = render(() => Component(props), container)
 
     return () => {
-      dispose?.();
-      dispose = undefined;
-    };
-  };
-};
+      dispose?.()
+      dispose = undefined
+    }
+  }
+}

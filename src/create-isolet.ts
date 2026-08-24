@@ -1,26 +1,24 @@
-import { mountContainer, type MountResult } from "./mount-container.js";
-import type { IsoletInstance, IsoletOptions } from "./types.js";
+import { mountContainer, type MountResult } from './mount-container.js'
+import type { IsoletInstance, IsoletOptions } from './types.js'
 
-export const createIsolet = <P = unknown>(
-  options: IsoletOptions<P>,
-): IsoletInstance<P> => {
-  let result: MountResult | null = null;
-  let cleanup: (() => void) | undefined;
-  let currentProps: P | undefined;
-  let isMounted = false;
+export const createIsolet = <P = unknown>(options: IsoletOptions<P>): IsoletInstance<P> => {
+  let result: MountResult | null = null
+  let cleanup: (() => void) | undefined
+  let currentProps: P | undefined
+  let isMounted = false
 
   const render = (props: P): void => {
-    if (!result) return;
-    const result_ = options.mount(result.container, props);
-    if (typeof result_ === "function") cleanup = result_;
-  };
+    if (!result) return
+    const result_ = options.mount(result.container, props)
+    if (typeof result_ === 'function') cleanup = result_
+  }
 
   const instance: IsoletInstance<P> = {
     mount(target?: HTMLElement, props?: P) {
-      if (isMounted) return;
-      if (typeof document === "undefined") return;
+      if (isMounted) return
+      if (typeof document === 'undefined') return
 
-      const mountTarget = target ?? document.body;
+      const mountTarget = target ?? document.body
       result = mountContainer(options.name, mountTarget, {
         isolation: options.isolation,
         css: options.css,
@@ -28,61 +26,57 @@ export const createIsolet = <P = unknown>(
         hostAttributes: options.hostAttributes,
         hostStyles: options.hostStyles,
         zIndex: options.zIndex,
-      });
+      })
 
-      currentProps = props ?? ({} as P);
-      isMounted = true;
-      render(currentProps);
+      currentProps = props ?? ({} as P)
+      isMounted = true
+      render(currentProps)
     },
 
     update(props: Partial<P>) {
-      if (!isMounted || !result) return;
-      currentProps = { ...(currentProps ?? ({} as P)), ...props } as P;
-      render(currentProps);
+      if (!isMounted || !result) return
+      currentProps = { ...(currentProps ?? ({} as P)), ...props } as P
+      render(currentProps)
     },
 
     unmount() {
-      if (!isMounted) return;
-      if (cleanup) cleanup();
-      cleanup = undefined;
+      if (!isMounted) return
+      if (cleanup) cleanup()
+      cleanup = undefined
 
       if (result?.host) {
-        result.host.remove();
+        result.host.remove()
       }
 
-      if (typeof document !== "undefined") {
-        const styleRoot = result?.target ?? document;
+      if (typeof document !== 'undefined') {
+        const styleRoot = result?.target ?? document
         const escapedName =
-          typeof CSS !== "undefined" && CSS.escape
-            ? CSS.escape(options.name)
-            : options.name;
-        const injectedStyle = styleRoot.querySelector(
-          `#isolet-style-${escapedName}`,
-        );
-        if (injectedStyle) injectedStyle.remove();
+          typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(options.name) : options.name
+        const injectedStyle = styleRoot.querySelector(`#isolet-style-${escapedName}`)
+        if (injectedStyle) injectedStyle.remove()
       }
 
-      result = null;
-      currentProps = undefined;
-      isMounted = false;
+      result = null
+      currentProps = undefined
+      isMounted = false
     },
 
     get host() {
-      return result?.host ?? null;
+      return result?.host ?? null
     },
 
     get container() {
-      return result?.container ?? null;
+      return result?.container ?? null
     },
 
     get shadowRoot() {
-      return result?.shadowRoot ?? null;
+      return result?.shadowRoot ?? null
     },
 
     get mounted() {
-      return isMounted;
+      return isMounted
     },
-  };
+  }
 
-  return instance;
-};
+  return instance
+}

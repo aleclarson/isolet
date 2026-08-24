@@ -1,4 +1,4 @@
-import { createElement, render, type ComponentType } from "preact";
+import { createElement, render, type ComponentType } from 'preact'
 
 /**
  * Preact adapter for isolet. Renders a Preact component into the container
@@ -8,10 +8,10 @@ export const preact = <P extends Record<string, unknown>>(
   Component: ComponentType<P>,
 ): ((container: HTMLElement, props: P) => () => void) => {
   return (container: HTMLElement, props: P) => {
-    render(createElement(Component, props), container);
+    render(createElement(Component, props), container)
 
     return () => {
-      render(null, container);
-    };
-  };
-};
+      render(null, container)
+    }
+  }
+}

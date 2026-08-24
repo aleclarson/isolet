@@ -1,4 +1,4 @@
-import { createApp, type Component, type App } from "vue";
+import { createApp, type Component, type App } from 'vue'
 
 /**
  * Vue adapter for isolet. Creates a Vue app instance once and
@@ -7,19 +7,19 @@ import { createApp, type Component, type App } from "vue";
 export const vue = <P extends Record<string, unknown>>(
   RootComponent: Component,
 ): ((container: HTMLElement, props: P) => () => void) => {
-  let app: App | null = null;
+  let app: App | null = null
 
   return (container: HTMLElement, props: P) => {
     if (app) {
-      app.unmount();
+      app.unmount()
     }
 
-    app = createApp(RootComponent, props);
-    app.mount(container);
+    app = createApp(RootComponent, props)
+    app.mount(container)
 
     return () => {
-      app?.unmount();
-      app = null;
-    };
-  };
-};
+      app?.unmount()
+      app = null
+    }
+  }
+}
