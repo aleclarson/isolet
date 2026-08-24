@@ -1,6 +1,7 @@
 {
   "name": "@alloc/isolet",
   "version": "0.0.0",
+  "description": "Package components into self-contained, isolated widgets",
   "license": "MIT OR Apache-2.0",
   "author": "Alec Larson",
   "repository": {
@@ -8,14 +9,83 @@
     "url": "https://github.com/aleclarson/@alloc/isolet.git"
   },
   "files": [
-    "dist",
-    "docs",
-    "examples"
+    "dist"
   ],
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/adapters/react.d.ts",
+        "default": "./dist/adapters/react.js"
+      },
+      "require": {
+        "types": "./dist/adapters/react.d.ts",
+        "default": "./dist/adapters/react.cjs"
+      }
+    },
+    "./vanilla": {
+      "import": {
+        "types": "./dist/adapters/vanilla.d.ts",
+        "default": "./dist/adapters/vanilla.js"
+      },
+      "require": {
+        "types": "./dist/adapters/vanilla.d.ts",
+        "default": "./dist/adapters/vanilla.cjs"
+      }
+    },
+    "./solid": {
+      "import": {
+        "types": "./dist/adapters/solid.d.ts",
+        "default": "./dist/adapters/solid.js"
+      },
+      "require": {
+        "types": "./dist/adapters/solid.d.ts",
+        "default": "./dist/adapters/solid.cjs"
+      }
+    },
+    "./preact": {
+      "import": {
+        "types": "./dist/adapters/preact.d.ts",
+        "default": "./dist/adapters/preact.js"
+      },
+      "require": {
+        "types": "./dist/adapters/preact.d.ts",
+        "default": "./dist/adapters/preact.cjs"
+      }
+    },
+    "./vue": {
+      "import": {
+        "types": "./dist/adapters/vue.d.ts",
+        "default": "./dist/adapters/vue.js"
+      },
+      "require": {
+        "types": "./dist/adapters/vue.d.ts",
+        "default": "./dist/adapters/vue.cjs"
+      }
+    },
+    "./svelte": {
+      "import": {
+        "types": "./dist/adapters/svelte.d.ts",
+        "default": "./dist/adapters/svelte.js"
+      },
+      "require": {
+        "types": "./dist/adapters/svelte.d.ts",
+        "default": "./dist/adapters/svelte.cjs"
+      }
+    }
   },
   "scripts": {
     "dev": "vite build --watch",
@@ -29,12 +99,47 @@
   },
   "devDependencies": {
     "@types/node": "^26.2.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "oxfmt": "^0.63.0",
     "oxlint": "^1.78.0",
-    "radashi": "^12.9.1",
+    "preact": "^10.29.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "solid-js": "^1.9.12",
+    "svelte": "^5.55.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.1",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "vue": "^3.5.32"
+  },
+  "peerDependencies": {
+    "preact": ">=10",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "solid-js": ">=1.0.0",
+    "svelte": ">=5",
+    "vue": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    },
+    "preact": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
   },
   "packageManager": "pnpm@11.21.0"
 }

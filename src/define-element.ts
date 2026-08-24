@@ -23,6 +23,9 @@ export interface DefineElementOptions<P = unknown> extends Omit<
  * Register an isolet as a custom element (web component).
  *
  * ```ts
+ * import { defineElement } from '@alloc/isolet'
+ * import { react } from '@alloc/isolet/react'
+ *
  * defineElement("my-counter", {
  *   mount: react(Counter),
  *   css: styles,
