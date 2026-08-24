@@ -1,13 +1,14 @@
 {
-  "include": ["src"],
+  "include": ["src/index.ts"],
   "compilerOptions": {
     "strict": true,
     "erasableSyntaxOnly": true,
     "noUncheckedSideEffectImports": true,
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "rootDir": "src",
     "declaration": true,
     "emitDeclarationOnly": true,
     "skipLibCheck": true,

@@ -29,14 +29,6 @@ export interface IsoletOptions<P = unknown> {
   css?: string;
 
   /**
-   * Path to a CSS file (or array of paths) to inline at build time.
-   * Requires the `autoStylesPlugin` in your build config.
-   * The plugin resolves the path, inlines url() assets, and replaces
-   * this field with `css` in the build output.
-   */
-  styles?: string | string[];
-
-  /**
    * Isolation strategy. Defaults to "shadow-dom".
    */
   isolation?: IsolationMode;

@@ -3,8 +3,6 @@ export { defineElement } from "./define-element.js";
 export { mountContainer } from "./mount-container.js";
 export { injectStyles } from "./inject-styles.js";
 export { detectCspNonce } from "./detect-csp-nonce.js";
-export { defineConfig } from "./define-config.js";
-export type { IsoletBuildConfig } from "./define-config.js";
 export type { DefineElementOptions } from "./define-element.js";
 export type {
   IsoletOptions,
