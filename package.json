@@ -6,7 +6,7 @@
   "author": "Alec Larson",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aleclarson/@alloc/isolet.git"
+    "url": "https://github.com/aleclarson/isolet"
   },
   "files": [
     "dist"
